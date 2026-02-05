@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'task.apps.TaskConfig',
     'rest_framework',
-    'django_filters'
+    'django_filters',
+    'drf_spectacular',
 
 ]
 
@@ -71,6 +72,29 @@ REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 1,
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Task Management API",
+    "DESCRIPTION": """
+    A REST API for managing personal tasks.
+
+    Features include:
+    - CRUD operations for tasks
+    - Soft delete via `is_archived` flag
+    - Filter & search tasks by status, priority, title, or description
+    - Custom API responses for all endpoints (consistent JSON messages)
+    - Task metadata: priority, status, due date, tags, created/updated timestamps
+    
+    """,
+    "VERSION": "v1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "CONTACT": {
+    "name": "Patricia Njoroge",
+    "email": "wanjikunpatricia@gmail.com",
+    "LICENSE": {
+        "name": "MIT",
+    },}
 }
 
 WSGI_APPLICATION = 'config.wsgi.application'
